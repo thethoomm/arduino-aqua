@@ -176,11 +176,12 @@ Sensors getSensorsData()
 
     // Temperatura
     RTD.send_read_cmd();
-    if (RTD.receive_read_cmd(data.temperature.value) == Ezo_board::SUCCESS)
+    if (RTD.receive_read_cmd() == Ezo_board::SUCCESS)
     {
         data.temperature.name = "Temperatura";
         data.temperature.unit = "C";
         data.temperature.date = date;
+        data.temperature.value = RTD.get_last_received_reading();
 
         if (data.temperature.value < tempLimits.min || data.temperature.value > tempLimits.max)
         {
@@ -197,11 +198,12 @@ Sensors getSensorsData()
 
     // Oxidação-redução pontencial
     ORP.send_read_cmd();
-    if (ORP.receive_read_cmd(data.orp.value) == Ezo_board::SUCCESS)
+    if (ORP.receive_read_cmd() == Ezo_board::SUCCESS)
     {
         data.orp.name = "ORP";
         data.orp.unit = "mV";
         data.orp.date = date;
+        data.orp.value = ORP.get_last_received_reading();
 
         if (data.orp.value < orpLimits.min || data.orp.value > orpLimits.max)
         {
@@ -218,11 +220,12 @@ Sensors getSensorsData()
 
     // pH
     PH.send_read_cmd();
-    if (PH.receive_read_cmd(data.ph.value) == Ezo_board::SUCCESS)
+    if (PH.receive_read_cmd() == Ezo_board::SUCCESS)
     {
         data.ph.name = "pH";
         data.ph.unit = "";
         data.ph.date = date;
+        data.ph.value = PH.get_last_received_reading();
 
         if (data.ph.value < phLimits.min || data.ph.value > phLimits.max)
         {
@@ -239,11 +242,12 @@ Sensors getSensorsData()
 
     // Condutividade
     EC.send_read_cmd();
-    if (EC.receive_read_cmd(data.condutivity.value) == Ezo_board::SUCCESS)
+    if (EC.receive_read_cmd() == Ezo_board::SUCCESS)
     {
         data.condutivity.name = "Condutividade";
         data.condutivity.unit = "µS/cm";
         data.condutivity.date = date;
+        data.condutivity.value = EC.get_last_received_reading();
 
         if (data.condutivity.value < condutivityLimits.min || data.condutivity.value > condutivityLimits.max)
         {
